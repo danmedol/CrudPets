@@ -1,4 +1,6 @@
 ﻿
+PetController controller = new PetController();
+
 bool executarPrograma = true;
 
 while (executarPrograma == true)
@@ -9,8 +11,6 @@ Console.WriteLine($"Escolha uma opção:\n1 - Cadastrar Pet\n2 - Listar pet\n3 -
 int opcao = Convert.ToInt32(Console.ReadLine());
 Menu opcaoMenu = (Menu)opcao;
 
-PetController controller = new PetController();
-
 switch(opcaoMenu)
 {
 case Menu.CadastrarPet:
@@ -20,7 +20,7 @@ break;
 }
 case Menu.ListarPets:
 {
-Console.WriteLine("Em construção");
+controller.ListarPets();
 break;
 }
 case Menu.EditarPet:

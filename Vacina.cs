@@ -8,4 +8,9 @@ public class Vacina
         Nome = nome;
         Data = data;
     }
+
+    public override string ToString()
+    {
+        return $"{Nome} - {Data.ToString("dd/MM/yyyy")}";
+    }
 }

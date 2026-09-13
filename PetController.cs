@@ -19,7 +19,7 @@ public class PetController
 
             if (int.TryParse(input, out idade))
             {
-                if (idade > min && idade < max)
+                if (idade >= min && idade <= max)
                 {
                     idadeValida = true;
                     
@@ -53,7 +53,7 @@ public class PetController
     {
         foreach (var pet in _pets)
         {
-            Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}\nVacinas: {string.Join(",", pet.Vacinas)}\nProcedimentos: {string.Join(",", pet.Procedimentos)}");
+            Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}");
         }
     }
 }
