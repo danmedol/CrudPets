@@ -9,11 +9,13 @@ Console.WriteLine($"Escolha uma opção:\n1 - Cadastrar Pet\n2 - Listar pet\n3 -
 int opcao = Convert.ToInt32(Console.ReadLine());
 Menu opcaoMenu = (Menu)opcao;
 
+PetController controller = new PetController();
+
 switch(opcaoMenu)
 {
 case Menu.CadastrarPet:
 {
-Console.WriteLine("Em construção");
+controller.CadastrarPet();
 break;
 }
 case Menu.ListarPets:
