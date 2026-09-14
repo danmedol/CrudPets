@@ -53,7 +53,7 @@ public class PetController
     {
         foreach (var pet in _pets)
         {
-            Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}");
+            Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}\nVacinas: {string.Join(",", pet.Vacinas)}\nProcedimentos: {string.Join(",", pet.Procedimentos)}");
         }
     }
 }
