@@ -116,10 +116,10 @@ public class PetController
                         string vacinaNome = Console.ReadLine() ?? "";
                         Console.WriteLine("Insira a data da vacina (dd/mm/aaaa)");
                         string vacinaData = Console.ReadLine() ?? "";
-                        DateTime dataConvetida;
-                        if (DateTime.TryParse(vacinaData, out dataConvetida))
+                        DateTime dataConvertida;
+                        if (DateTime.TryParse(vacinaData, out dataConvertida))
                         {
-                        Vacina vacina = new Vacina(nome: vacinaNome, data: dataConvetida);
+                        Vacina vacina = new Vacina(nome: vacinaNome, data: dataConvertida);
                         _pets[petSelecionado - 1].Vacinas.Add(vacina);
                         Console.WriteLine("Vacina adicionada com sucesso");
                         petValido = true;
