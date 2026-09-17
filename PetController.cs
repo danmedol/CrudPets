@@ -11,7 +11,7 @@ public class PetController
     {
         int idade = 0;
         bool idadeValida = false;
-
+        
         while(!idadeValida)
         {
             Console.WriteLine(mensagem);
@@ -85,8 +85,8 @@ public class PetController
 
     public void AdicionarVacina()
     {
-        bool petValido = false;
-        while (!petValido)
+        bool listaValida = false;
+        while (!listaValida)
         {
             if (_pets.Count > 0)
             {
@@ -95,11 +95,50 @@ public class PetController
                 {
                     Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
                 }
-                petValido = true;
+                listaValida = true;
             }
             else
             {
                 Console.WriteLine("A lista de pets está vazia.");
+            }
+
+            int petSelecionado = 0;
+
+            bool petValido = false;
+            while(!petValido)
+            {
+                string input = Console.ReadLine() ?? "";
+                if (int.TryParse(input, out petSelecionado))
+                {
+                    if (petSelecionado > 0 && petSelecionado <= _pets.Count)
+                    {
+                        Console.WriteLine("Insira o nome da vacina:");
+                        string vacinaNome = Console.ReadLine() ?? "";
+                        Console.WriteLine("Insira a data da vacina (dd/mm/aaaa)");
+                        string vacinaData = Console.ReadLine() ?? "";
+                        DateTime dataConvetida;
+                        if (DateTime.TryParse(vacinaData, out dataConvetida))
+                        {
+                        Vacina vacina = new Vacina(nome: vacinaNome, data: dataConvetida);
+                        _pets[petSelecionado - 1].Vacinas.Add(vacina);
+                        Console.WriteLine("Vacina adicionada com sucesso");
+                        petValido = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Data inválida.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Seleção inválida.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("A seleção não pode ficar vazia.");
+                }
+
             }
         }
     }
