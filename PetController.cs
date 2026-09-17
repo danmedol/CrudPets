@@ -38,10 +38,36 @@ public class PetController
     }
     public void CadastrarPet()
     {
+        string nome = "";
+        while (string.IsNullOrWhiteSpace(nome))
+        {
         Console.WriteLine("Insira o nome do pet:");
-        string nome = Console.ReadLine() ?? "";
+        nome = Console.ReadLine() ?? "";
+        if (string.IsNullOrWhiteSpace(nome))
+        {
+            Console.WriteLine("O campo nome não pode ficar vazio");
+        }
+        else
+        {
+            nome = char.ToUpper(nome[0]) + nome.Substring(1).ToLower();
+        }
+        }
+        
+        string especie = "";
+        while(string.IsNullOrWhiteSpace(especie))
+        {
         Console.WriteLine("Insira a espécie");
-        string especie = Console.ReadLine() ?? "";
+        especie = Console.ReadLine() ?? "";
+        if (string.IsNullOrWhiteSpace(especie))
+        {
+            Console.WriteLine("O campo espécie não pode ficar vazio");
+        }
+        else
+        {
+            especie = char.ToUpper(especie[0]) + especie.Substring(1).ToLower();
+        }
+        }
+
         int idade = LerIdade(mensagem: "Insira a idade", min: 1, max: 100);
 
         Pet pet = new Pet(nome: nome, especie: especie, idade: idade);
@@ -54,6 +80,27 @@ public class PetController
         foreach (var pet in _pets)
         {
             Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}\nVacinas: {string.Join(",", pet.Vacinas)}\nProcedimentos: {string.Join(",", pet.Procedimentos)}");
+        }
+    }
+
+    public void AdicionarVacina()
+    {
+        bool petValido = false;
+        while (!petValido)
+        {
+            if (_pets.Count > 0)
+            {
+                Console.WriteLine("Selecione o pet:");
+                for (int i = 0; i < _pets.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
+                }
+                petValido = true;
+            }
+            else
+            {
+                Console.WriteLine("A lista de pets está vazia.");
+            }
         }
     }
 }

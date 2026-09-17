@@ -30,7 +30,7 @@ break;
 }
 case Menu.AdicionarVacina:
 {
-Console.WriteLine("Em construção");
+controller.AdicionarVacina();
 break;
 }
 case Menu.AdicionarProcedimento:
