@@ -142,4 +142,83 @@ public class PetController
             }
         }
     }
+
+    public void AdicionarProcedimento()
+    {
+        bool listaValida = false;
+        while (!listaValida)
+        {
+            if (_pets.Count > 0)
+            {
+                Console.WriteLine("Selecione o pet:");
+                for (int i = 0; i < _pets.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
+                }
+                listaValida = true;
+            }
+            else
+            {
+                Console.WriteLine("A lista de pets está vazia.");
+            }
+
+            int petSelecionado = 0;
+
+            bool petValido = false;
+            while(!petValido)
+            {
+                string input = Console.ReadLine() ?? "";
+                if (int.TryParse(input, out petSelecionado))
+                {
+                    if (petSelecionado > 0 && petSelecionado <= _pets.Count)
+                    {
+                        Console.WriteLine("Insira o nome do procedimento:");
+                        string procedimentoNome = Console.ReadLine() ?? "";
+                        Console.WriteLine("Insira a data do procedimento (dd/mm/aaaa)");
+                        string procedimentoData = Console.ReadLine() ?? "";
+                        DateTime dataConvertida;
+                        if (DateTime.TryParse(procedimentoData, out dataConvertida))
+                        {
+                        Procedimento procedimento = new Procedimento(nome: procedimentoNome, data: dataConvertida);
+                        _pets[petSelecionado - 1].Procedimentos.Add(procedimento);
+                        Console.WriteLine("Vacina adicionada com sucesso");
+                        petValido = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Data inválida.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Seleção inválida.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("A seleção não pode ficar vazia.");
+                }
+
+            }
+        }
+    }
+
+    public void DeletarPet()
+    {
+        bool listaValida = false;
+        while (!listaValida)
+        {
+            if (_pets.Count > 0)
+            {
+                for (int i = 1; i < _pets.Count; i++)
+                {
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("A lista de pets está vazia.");
+            }
+        }
+}
 }

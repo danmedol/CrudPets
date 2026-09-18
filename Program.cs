@@ -35,7 +35,7 @@ break;
 }
 case Menu.AdicionarProcedimento:
 {
-Console.WriteLine("Em construção");
+controller.AdicionarProcedimento();
 break;
 }
 case Menu.DeletarPet:
