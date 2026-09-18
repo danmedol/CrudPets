@@ -11,8 +11,8 @@ public class PetController
     {
         int idade = 0;
         bool idadeValida = false;
-        
-        while(!idadeValida)
+
+        while (!idadeValida)
         {
             Console.WriteLine(mensagem);
             string input = Console.ReadLine() ?? "";
@@ -22,7 +22,7 @@ public class PetController
                 if (idade >= min && idade <= max)
                 {
                     idadeValida = true;
-                    
+
                 }
                 else
                 {
@@ -41,31 +41,31 @@ public class PetController
         string nome = "";
         while (string.IsNullOrWhiteSpace(nome))
         {
-        Console.WriteLine("Insira o nome do pet:");
-        nome = Console.ReadLine() ?? "";
-        if (string.IsNullOrWhiteSpace(nome))
-        {
-            Console.WriteLine("O campo nome não pode ficar vazio");
+            Console.WriteLine("Insira o nome do pet:");
+            nome = Console.ReadLine() ?? "";
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                Console.WriteLine("O campo nome não pode ficar vazio");
+            }
+            else
+            {
+                nome = char.ToUpper(nome[0]) + nome.Substring(1).ToLower();
+            }
         }
-        else
-        {
-            nome = char.ToUpper(nome[0]) + nome.Substring(1).ToLower();
-        }
-        }
-        
+
         string especie = "";
-        while(string.IsNullOrWhiteSpace(especie))
+        while (string.IsNullOrWhiteSpace(especie))
         {
-        Console.WriteLine("Insira a espécie");
-        especie = Console.ReadLine() ?? "";
-        if (string.IsNullOrWhiteSpace(especie))
-        {
-            Console.WriteLine("O campo espécie não pode ficar vazio");
-        }
-        else
-        {
-            especie = char.ToUpper(especie[0]) + especie.Substring(1).ToLower();
-        }
+            Console.WriteLine("Insira a espécie");
+            especie = Console.ReadLine() ?? "";
+            if (string.IsNullOrWhiteSpace(especie))
+            {
+                Console.WriteLine("O campo espécie não pode ficar vazio");
+            }
+            else
+            {
+                especie = char.ToUpper(especie[0]) + especie.Substring(1).ToLower();
+            }
         }
 
         int idade = LerIdade(mensagem: "Insira a idade", min: 1, max: 100);
@@ -105,7 +105,7 @@ public class PetController
             int petSelecionado = 0;
 
             bool petValido = false;
-            while(!petValido)
+            while (!petValido)
             {
                 string input = Console.ReadLine() ?? "";
                 if (int.TryParse(input, out petSelecionado))
@@ -119,10 +119,10 @@ public class PetController
                         DateTime dataConvertida;
                         if (DateTime.TryParse(vacinaData, out dataConvertida))
                         {
-                        Vacina vacina = new Vacina(nome: vacinaNome, data: dataConvertida);
-                        _pets[petSelecionado - 1].Vacinas.Add(vacina);
-                        Console.WriteLine("Vacina adicionada com sucesso");
-                        petValido = true;
+                            Vacina vacina = new Vacina(nome: vacinaNome, data: dataConvertida);
+                            _pets[petSelecionado - 1].Vacinas.Add(vacina);
+                            Console.WriteLine("Vacina adicionada com sucesso");
+                            petValido = true;
                         }
                         else
                         {
@@ -165,7 +165,7 @@ public class PetController
             int petSelecionado = 0;
 
             bool petValido = false;
-            while(!petValido)
+            while (!petValido)
             {
                 string input = Console.ReadLine() ?? "";
                 if (int.TryParse(input, out petSelecionado))
@@ -179,10 +179,10 @@ public class PetController
                         DateTime dataConvertida;
                         if (DateTime.TryParse(procedimentoData, out dataConvertida))
                         {
-                        Procedimento procedimento = new Procedimento(nome: procedimentoNome, data: dataConvertida);
-                        _pets[petSelecionado - 1].Procedimentos.Add(procedimento);
-                        Console.WriteLine("Vacina adicionada com sucesso");
-                        petValido = true;
+                            Procedimento procedimento = new Procedimento(nome: procedimentoNome, data: dataConvertida);
+                            _pets[petSelecionado - 1].Procedimentos.Add(procedimento);
+                            Console.WriteLine("Vacina adicionada com sucesso");
+                            petValido = true;
                         }
                         else
                         {
@@ -212,13 +212,29 @@ public class PetController
             {
                 for (int i = 1; i < _pets.Count; i++)
                 {
-                    
+                    Console.WriteLine($"{i} - {_pets[i].Nome}");
                 }
+                listaValida = true;
             }
             else
             {
                 Console.WriteLine("A lista de pets está vazia.");
             }
+
+            int petSelecionado = 0;
+
+            bool petValido = false;
+            while (!petValido)
+            {
+                string input = Console.ReadLine() ?? "";
+                if (int.TryParse(input, out petSelecionado))
+                {
+                    if (petSelecionado > 0 && petSelecionado <= _pets.Count)
+                    {
+                        _pets.RemoveAt(petSelecionado);
+                    }
+                }
+            }
         }
-}
+    }
 }
