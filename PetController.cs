@@ -188,7 +188,7 @@ public class PetController
                         {
                             Procedimento procedimento = new Procedimento(nome: procedimentoNome, data: dataConvertida);
                             _pets[petSelecionado - 1].Procedimentos.Add(procedimento);
-                            Console.WriteLine("Vacina adicionada com sucesso");
+                            Console.WriteLine("Procedimento adicionado com sucesso");
                             petValido = true;
                         }
                         else
