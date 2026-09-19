@@ -40,7 +40,7 @@ break;
 }
 case Menu.DeletarPet:
 {
-Console.WriteLine("Em construção");
+controller.DeletarPet();
 break;
 }
 case Menu.Sair:

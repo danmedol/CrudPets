@@ -77,9 +77,16 @@ public class PetController
 
     public void ListarPets()
     {
-        foreach (var pet in _pets)
+        if (_pets.Count > 0)
         {
-            Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}\nVacinas: {string.Join(",", pet.Vacinas)}\nProcedimentos: {string.Join(",", pet.Procedimentos)}");
+            foreach (Pet pet in _pets)
+            {
+                Console.WriteLine($"Nome: {pet.Nome}\nEspécie: {pet.Especie}\nIdade: {pet.Idade}\nVacinas: {string.Join(",", pet.Vacinas)}\nProcedimentos: {string.Join(",", pet.Procedimentos)}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("A lista de pets está vazia.");
         }
     }
 
@@ -210,9 +217,10 @@ public class PetController
         {
             if (_pets.Count > 0)
             {
-                for (int i = 1; i < _pets.Count; i++)
+                Console.WriteLine("Selecione o pet:");
+                for (int i = 0; i < _pets.Count; i++)
                 {
-                    Console.WriteLine($"{i} - {_pets[i].Nome}");
+                    Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
                 }
                 listaValida = true;
             }
@@ -231,8 +239,14 @@ public class PetController
                 {
                     if (petSelecionado > 0 && petSelecionado <= _pets.Count)
                     {
-                        _pets.RemoveAt(petSelecionado);
+                        _pets.RemoveAt(petSelecionado - 1);
+                        Console.WriteLine("Pet removido com sucesso.");
+                        petValido = true;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Seleção inválida");
                 }
             }
         }
