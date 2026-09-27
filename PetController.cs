@@ -258,7 +258,8 @@ public class PetController
         while(!listaValida)
         {
             if(_pets.Count > 0)
-            {
+            {  
+                Console.WriteLine("Selecione o pet para editar:");
                 for(int i = 0; i <= _pets.Count; i ++)
                 {
                     Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
