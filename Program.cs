@@ -25,7 +25,7 @@ break;
 }
 case Menu.EditarPet:
 {
-Console.WriteLine("Em construção");
+controller.EditarPet();
 break;
 }
 case Menu.AdicionarVacina:
