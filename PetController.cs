@@ -251,4 +251,44 @@ public class PetController
             }
         }
     }
+
+    public void EditarPet()
+    {
+        bool listaValida = false;
+        while(!listaValida)
+        {
+            if(_pets.Count > 0)
+            {
+                for(int i = 0; i <= _pets.Count; i ++)
+                {
+                    Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
+                }
+                listaValida = true;
+            }
+            else
+            {
+                Console.WriteLine("A lista está vazia");
+            }
+
+            int petSelecionado = 0;
+            
+            bool petValido = false;
+            
+            while(!petValido)
+            {
+                string input = Console.ReadLine() ?? "";
+                if (int.TryParse(input, out petSelecionado))
+                {
+                    if (petSelecionado > 0 && petSelecionado <= _pets.Count)
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Seleção inválida");
+                }
+            }
+        }
+    }
 }
