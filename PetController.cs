@@ -254,41 +254,96 @@ public class PetController
 
     public void EditarPet()
     {
-        bool listaValida = false;
-        while(!listaValida)
+        if (_pets.Count == 0)
         {
-            if(_pets.Count > 0)
-            {  
-                Console.WriteLine("Selecione o pet para editar:");
-                for(int i = 0; i <= _pets.Count; i ++)
-                {
-                    Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
-                }
-                listaValida = true;
-            }
-            else
-            {
-                Console.WriteLine("A lista está vazia");
-            }
+            Console.WriteLine("A lista está vazia.");
+            return;
+        }
 
-            int petSelecionado = 0;
-            
-            bool petValido = false;
-            
-            while(!petValido)
+        Console.WriteLine("Selecione o pet:");
+        for (int i = 0; i < _pets.Count; i++)
+        {
+            Console.WriteLine($"{i + 1} - {_pets[i].Nome}");
+        }
+
+        int petSelecionado = 0;
+        bool petValido = false;
+        while (!petValido)
+        {
+            string input = Console.ReadLine() ?? "";
+            if (int.TryParse(input, out petSelecionado))
             {
-                string input = Console.ReadLine() ?? "";
-                if (int.TryParse(input, out petSelecionado))
+                if (petSelecionado > 0 && petSelecionado <= _pets.Count)
                 {
-                    if (petSelecionado > 0 && petSelecionado <= _pets.Count)
-                    {
-                        
-                    }
+                    petValido = true;
                 }
                 else
                 {
-                    Console.WriteLine("Seleção inválida");
+                    Console.WriteLine("Seleção inválida.");
                 }
+            }
+            else
+            {
+                Console.WriteLine("Digite apenas números.");
+            }
+        }
+
+        bool executarSubMenu = true;
+        while (executarSubMenu)
+        {
+            Console.WriteLine("Escolha uma opção:\n1 - Editar nome\n2 - Editar espécie\n3 - Editar idade\n4 - Voltar");
+            int opcao = Convert.ToInt32(Console.ReadLine());
+            SubMenu opcaoSubMenu = (SubMenu)opcao;
+
+            switch (opcaoSubMenu)
+            {
+                case SubMenu.EditarNome:
+                    {
+                        Console.WriteLine("Insira o novo nome:");
+                        string novoNome = Console.ReadLine() ?? "";
+                        if (!string.IsNullOrWhiteSpace(novoNome))
+                        {
+                            novoNome = char.ToUpper(novoNome[0]) + novoNome.Substring(1).ToLower();
+                            _pets[petSelecionado - 1].EditarNome(novoNome);
+                            Console.WriteLine("Nome editado com sucesso.");
+                            executarSubMenu = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("O campo não pode ficar vazio.");
+                        }
+                        break;
+                    }
+                case SubMenu.EditarEspecie:
+                    {
+                        Console.WriteLine("Insira a nova espécie:");
+                        string novaEspecie = Console.ReadLine() ?? "";
+                        if (!string.IsNullOrWhiteSpace(novaEspecie))
+                        {
+                            novaEspecie = char.ToUpper(novaEspecie[0]) + novaEspecie.Substring(1).ToLower();
+                            _pets[petSelecionado - 1].EditarEspecie(novaEspecie);
+                            Console.WriteLine("Espécie editada com sucesso.");
+                            executarSubMenu = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("O campo não pode ficar vazio.");
+                        }
+                        break;
+                    }
+                case SubMenu.EditarIdade:
+                    {
+                        int novaIdade = LerIdade(mensagem: "Insira a nova idade:", min: 1, max: 100);
+                        _pets[petSelecionado - 1].EditarIdade(novaIdade);
+                        Console.WriteLine("Idade atualizada com sucesso.");
+                        executarSubMenu = false;
+                        break;
+                    }
+                case SubMenu.Voltar:
+                    {
+                        executarSubMenu = false;
+                        break;
+                    }
             }
         }
     }
